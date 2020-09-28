@@ -38,4 +38,5 @@
     <string name="correct_questions_text">Correct Questions To Win:</string>
     <string name="correct_questions_val">%d</string>
     <string name="title_trivia_settings">Trivia Settings</string>
+    <string name="update">Update</string>
 </resources>
