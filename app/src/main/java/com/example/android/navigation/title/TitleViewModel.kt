@@ -1,4 +1,4 @@
-package com.example.android.navigation
+package com.example.android.navigation.title
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -16,23 +16,9 @@ class TitleViewModel (
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _triviaSettings = MutableLiveData<TriviaSettings?>()
-    val triviaSettings: LiveData<TriviaSettings?>
-        get() = _triviaSettings
-
     private val _navigateToGameFragment = MutableLiveData<TriviaSettings?>()
     val navigateToGameFragment: LiveData<TriviaSettings?>
         get() = _navigateToGameFragment
-
-    init {
-        initializeTriviaSettings()
-    }
-
-    private fun initializeTriviaSettings() {
-        uiScope.launch {
-            _triviaSettings.value = getTriviaSettingsFromDatabase()
-        }
-    }
 
     private suspend fun getTriviaSettingsFromDatabase(): TriviaSettings? {
         return withContext(Dispatchers.IO) {
@@ -51,7 +37,11 @@ class TitleViewModel (
     }
 
     fun onPlayButtonClicked() {
-        _navigateToGameFragment.value = _triviaSettings.value
+        uiScope.launch {
+            val triviaSettings = getTriviaSettingsFromDatabase()
+
+            _navigateToGameFragment.value = triviaSettings
+        }
     }
 
     fun doneNavigating() {

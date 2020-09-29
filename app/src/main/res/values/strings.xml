@@ -39,4 +39,5 @@
     <string name="correct_questions_val">%d</string>
     <string name="title_trivia_settings">Trivia Settings</string>
     <string name="update">Update</string>
+    <string name="settings_updated">Settings Updated</string>
 </resources>

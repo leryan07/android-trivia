@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +45,8 @@ class TriviaSettingsFragment : Fragment() {
 
             if (correctQuestionsToWin != null) {
                 triviaSettingsViewModel.onUpdateTriviaSettings(correctQuestionsToWin)
+
+                Toast.makeText(binding.root.context, getString(R.string.settings_updated), Toast.LENGTH_SHORT).show()
             }
         }
 

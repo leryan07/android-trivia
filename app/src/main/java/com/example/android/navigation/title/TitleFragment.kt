@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigation
+package com.example.android.navigation.title
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,10 +30,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.android.navigation.R
 import com.example.android.navigation.database.TriviaSettingsDatabase
 import com.example.android.navigation.databinding.FragmentTitleBinding
-import com.example.android.navigation.settings.TriviaSettingsViewModel
-import com.example.android.navigation.settings.TriviaSettingsViewModelFactory
 
 class TitleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

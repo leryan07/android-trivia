@@ -22,7 +22,7 @@
     app:startDestination="@+id/titleFragment">
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.android.navigation.TitleFragment"
+        android:name="com.example.android.navigation.title.TitleFragment"
         android:label="@string/android_trivia"
         tools:layout="@layout/fragment_title">
         <action
