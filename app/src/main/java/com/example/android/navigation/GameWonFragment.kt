@@ -42,9 +42,14 @@ class GameWonFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentGameWonBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_won, container, false)
+
+        val arguments = GameOverFragmentArgs.fromBundle(arguments!!)
+
+        val numQuestions = arguments.numQuestions
+
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(
-                    GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
+                    GameWonFragmentDirections.actionGameWonFragmentToGameFragment(numQuestions))
         }
         setHasOptionsMenu(true)
         return binding.root

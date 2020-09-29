@@ -1,18 +1,14 @@
-package com.example.android.navigation.settings
+package com.example.android.navigation
 
 import android.app.Application
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.android.navigation.R
-import com.example.android.navigation.Utils.hideKeyboard
 import com.example.android.navigation.database.TriviaSettings
 import com.example.android.navigation.database.TriviaSettingsDatabaseDao
 import kotlinx.coroutines.*
 
-class TriviaSettingsViewModel(
+class TitleViewModel (
         val database: TriviaSettingsDatabaseDao,
         application: Application) : ViewModel() {
 
@@ -24,11 +20,9 @@ class TriviaSettingsViewModel(
     val triviaSettings: LiveData<TriviaSettings?>
         get() = _triviaSettings
 
-    val displayCorrectQuestionsToWin = Transformations.map(triviaSettings) {
-        application.applicationContext.getString(
-                R.string.correct_questions_val, it?.numQuestionsToWin
-        )
-    }
+    private val _navigateToGameFragment = MutableLiveData<TriviaSettings?>()
+    val navigateToGameFragment: LiveData<TriviaSettings?>
+        get() = _navigateToGameFragment
 
     init {
         initializeTriviaSettings()
@@ -56,18 +50,11 @@ class TriviaSettingsViewModel(
         }
     }
 
-    fun onUpdateTriviaSettings(correctQuestionsToWin: Int) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                _triviaSettings.value?.numQuestionsToWin = correctQuestionsToWin
-
-                database.update(_triviaSettings.value!!)
-            }
-        }
+    fun onPlayButtonClicked() {
+        _navigateToGameFragment.value = _triviaSettings.value
     }
 
-    fun clearCorrectQuestionsEditTextFocus(view: EditText) {
-        view.clearFocus()
-        view.hideKeyboard()
+    fun doneNavigating() {
+        _navigateToGameFragment.value = null
     }
 }

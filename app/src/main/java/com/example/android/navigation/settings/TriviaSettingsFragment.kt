@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.navigation.R
-import com.example.android.navigation.Utils.hideKeyboard
 import com.example.android.navigation.database.TriviaSettingsDatabase
 import com.example.android.navigation.databinding.FragmentSettingsBinding
 
@@ -33,17 +32,21 @@ class TriviaSettingsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.root.setOnClickListener {
-            clearCorrectQuestionsEditTextFocus(binding.root.findViewById(R.id.correctQuestionsEditTextNumber))
+            val view: EditText = binding.correctQuestionsEditTextNumber
+
+            triviaSettingsViewModel.clearCorrectQuestionsEditTextFocus(view)
         }
         binding.updateSettingButton.setOnClickListener {
-            clearCorrectQuestionsEditTextFocus(binding.root.findViewById(R.id.correctQuestionsEditTextNumber))
+            val correctQuestionsToWin: Int? = binding.correctQuestionsEditTextNumber.text.toString().toIntOrNull()
+            val view: EditText = binding.correctQuestionsEditTextNumber
+
+            triviaSettingsViewModel.clearCorrectQuestionsEditTextFocus(view)
+
+            if (correctQuestionsToWin != null) {
+                triviaSettingsViewModel.onUpdateTriviaSettings(correctQuestionsToWin)
+            }
         }
 
         return binding.root
-    }
-
-    private fun clearCorrectQuestionsEditTextFocus(view: EditText) {
-        view.clearFocus()
-        view.hideKeyboard()
     }
 }

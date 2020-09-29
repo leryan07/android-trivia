@@ -60,7 +60,7 @@ class GameFragment : Fragment() {
     lateinit var currentQuestion: Question
     lateinit var answers: MutableList<String>
     private var questionIndex = 0
-    private val numQuestions = Math.min((questions.size + 1) / 2, 3)
+    private var numQuestions = Math.min((questions.size + 1) / 2, 3)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,6 +68,10 @@ class GameFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentGameBinding>(
                 inflater, R.layout.fragment_game, container, false)
+
+        val arguments = GameFragmentArgs.fromBundle(arguments!!)
+
+        numQuestions = arguments.numQuestions
 
         // Shuffles the questions and sets the question index to the first question.
         randomizeQuestions()
@@ -101,7 +105,7 @@ class GameFragment : Fragment() {
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
-                    view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment())
+                    view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment(numQuestions))
                 }
             }
         }
