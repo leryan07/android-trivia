@@ -9,6 +9,6 @@ data class TriviaSettings(
         @PrimaryKey(autoGenerate = true)
         var settingsId: Long = 0L,
 
-        @ColumnInfo(name = "correct_questions_to_win")
-        var numQuestionsToWin: Int = 3
+        @ColumnInfo(name = "num_questions")
+        var numQuestions: Int = 3
 )

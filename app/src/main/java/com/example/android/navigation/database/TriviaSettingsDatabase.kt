@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TriviaSettings::class], version = 1, exportSchema = false)
+@Database(entities = [TriviaSettings::class], version = 2, exportSchema = false)
 abstract class TriviaSettingsDatabase : RoomDatabase() {
 
     abstract val triviaSettingsDatabaseDao: TriviaSettingsDatabaseDao

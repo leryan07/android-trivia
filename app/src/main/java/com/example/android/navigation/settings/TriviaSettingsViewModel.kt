@@ -24,7 +24,7 @@ class TriviaSettingsViewModel(
 
     val displayCorrectQuestionsToWin = Transformations.map(triviaSettings) {
         application.applicationContext.getString(
-                R.string.correct_questions_val, it?.numQuestionsToWin
+                R.string.correct_questions_val, it?.numQuestions
         )
     }
 
@@ -57,7 +57,7 @@ class TriviaSettingsViewModel(
     fun onUpdateTriviaSettings(correctQuestionsToWin: Int) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                _triviaSettings.value?.numQuestionsToWin = correctQuestionsToWin
+                _triviaSettings.value?.numQuestions = correctQuestionsToWin
 
                 database.update(_triviaSettings.value!!)
             }
