@@ -1,13 +1,11 @@
 package com.example.android.navigation.settings
 
 import android.app.Application
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.android.navigation.R
-import com.example.android.navigation.Utils.hideKeyboard
 import com.example.android.navigation.database.TriviaSettings
 import com.example.android.navigation.database.TriviaSettingsDatabaseDao
 import kotlinx.coroutines.*
@@ -64,10 +62,5 @@ class TriviaSettingsViewModel(
                 database.update(_triviaSettings.value!!)
             }
         }
-    }
-
-    fun clearCorrectQuestionsEditTextFocus(view: EditText) {
-        view.clearFocus()
-        view.hideKeyboard()
     }
 }

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.navigation.R
+import com.example.android.navigation.Utils.hideKeyboard
 import com.example.android.navigation.database.TriviaSettingsDatabase
 import com.example.android.navigation.databinding.FragmentSettingsBinding
 
@@ -33,20 +34,22 @@ class TriviaSettingsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.root.setOnClickListener {
-            val view: EditText = binding.correctQuestionsEditTextNumber
-
-            triviaSettingsViewModel.clearCorrectQuestionsEditTextFocus(view)
+            binding.root.findViewById<EditText>(R.id.correctQuestionsEditTextNumber).clearFocus()
         }
         binding.updateSettingButton.setOnClickListener {
-            val correctQuestionsToWin: Int? = binding.correctQuestionsEditTextNumber.text.toString().toIntOrNull()
-            val view: EditText = binding.correctQuestionsEditTextNumber
+            binding.root.findViewById<EditText>(R.id.correctQuestionsEditTextNumber).clearFocus()
 
-            triviaSettingsViewModel.clearCorrectQuestionsEditTextFocus(view)
+            val correctQuestionsToWin: Int? = binding.correctQuestionsEditTextNumber.text.toString().toIntOrNull()
 
             if (correctQuestionsToWin != null) {
                 triviaSettingsViewModel.onUpdateTriviaSettings(correctQuestionsToWin)
 
-                Toast.makeText(binding.root.context, getString(R.string.settings_updated), Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.settings_updated), Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.correctQuestionsEditTextNumber.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                view.hideKeyboard()
             }
         }
 
