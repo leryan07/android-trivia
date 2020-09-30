@@ -1,7 +1,6 @@
 package com.example.android.navigation.settings
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -18,9 +17,7 @@ class TriviaSettingsViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _triviaSettings = MutableLiveData<TriviaSettings?>()
-    val triviaSettings: LiveData<TriviaSettings?>
-        get() = _triviaSettings
+    private val triviaSettings = MutableLiveData<TriviaSettings?>()
 
     val displayCorrectQuestionsToWin = Transformations.map(triviaSettings) {
         application.applicationContext.getString(
@@ -29,37 +26,27 @@ class TriviaSettingsViewModel(
     }
 
     init {
-        initializeTriviaSettings()
+        setTriviaSettings()
     }
 
-    private fun initializeTriviaSettings() {
+    private fun setTriviaSettings() {
         uiScope.launch {
-            _triviaSettings.value = getTriviaSettingsFromDatabase()
+            triviaSettings.value = setTriviaSettingsFromDatabase()
         }
     }
 
-    private suspend fun getTriviaSettingsFromDatabase(): TriviaSettings? {
+    private suspend fun setTriviaSettingsFromDatabase(): TriviaSettings? {
         return withContext(Dispatchers.IO) {
-            var currentSettings = database.getTriviaSettings()
-
-            if (currentSettings == null) {
-                val defaultSettings = TriviaSettings()
-
-                database.insert(defaultSettings)
-
-                currentSettings = database.getTriviaSettings()
-            }
-
-            currentSettings
+            database.getTriviaSettings()
         }
     }
 
     fun onUpdateTriviaSettings(correctQuestionsToWin: Int) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                _triviaSettings.value?.numQuestions = correctQuestionsToWin
+                triviaSettings.value?.numQuestions = correctQuestionsToWin
 
-                database.update(_triviaSettings.value!!)
+                database.update(triviaSettings.value!!)
             }
         }
     }
