@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigation
+package com.example.android.navigation.game
 
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.example.android.navigation.R
 import com.example.android.navigation.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -69,10 +70,6 @@ class GameFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentGameBinding>(
                 inflater, R.layout.fragment_game, container, false)
 
-        val arguments = GameFragmentArgs.fromBundle(arguments!!)
-
-        numQuestions = arguments.numQuestions
-
         // Shuffles the questions and sets the question index to the first question.
         randomizeQuestions()
 
@@ -101,7 +98,7 @@ class GameFragment : Fragment() {
                         binding.invalidateAll()
                     } else {
                         // We've won!  Navigate to the gameWonFragment.
-                        view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions,questionIndex))
+                        view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.

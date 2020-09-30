@@ -16,9 +16,21 @@ class TitleViewModel (
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _navigateToGameFragment = MutableLiveData<TriviaSettings?>()
-    val navigateToGameFragment: LiveData<TriviaSettings?>
+    private var triviaSettings = MutableLiveData<TriviaSettings?>()
+
+    private val _navigateToGameFragment = MutableLiveData<Boolean>()
+    val navigateToGameFragment: LiveData<Boolean>
         get() = _navigateToGameFragment
+
+    init {
+        initializeTriviaSettings()
+    }
+
+    private fun initializeTriviaSettings() {
+        uiScope.launch {
+            triviaSettings.value = getTriviaSettingsFromDatabase()
+        }
+    }
 
     private suspend fun getTriviaSettingsFromDatabase(): TriviaSettings? {
         return withContext(Dispatchers.IO) {
@@ -38,9 +50,7 @@ class TitleViewModel (
 
     fun onPlayButtonClicked() {
         uiScope.launch {
-            val triviaSettings = getTriviaSettingsFromDatabase()
-
-            _navigateToGameFragment.value = triviaSettings
+            _navigateToGameFragment.value = true
         }
     }
 

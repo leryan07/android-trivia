@@ -49,16 +49,17 @@ class TitleFragment : Fragment() {
         val titleViewModel = ViewModelProvider(this, viewModelFactory)
                 .get(TitleViewModel::class.java)
 
-        titleViewModel.navigateToGameFragment.observe(viewLifecycleOwner, Observer { triviaSettings ->
-            triviaSettings?.let {
+        titleViewModel.navigateToGameFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
                 this.findNavController()
-                        .navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment(triviaSettings.numQuestionsToWin))
+                        .navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
 
                 titleViewModel.doneNavigating()
             }
         })
 
         binding.titleViewModel = titleViewModel
+        binding.lifecycleOwner = this
 
         setHasOptionsMenu(true)
         return binding.root
