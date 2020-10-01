@@ -127,7 +127,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="triviaSettingsFragment">
+                  <entry key="triviaSettingsActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

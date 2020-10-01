@@ -35,9 +35,6 @@
     <string name="share">Share</string>
     <string name="sharing_not_available">Sharing Not Available</string>
     <string name="settings">Settings</string>
-    <string name="correct_questions_text">Correct Questions To Win:</string>
-    <string name="correct_questions_val">%d</string>
-    <string name="title_trivia_settings">Trivia Settings</string>
-    <string name="update">Update</string>
-    <string name="settings_updated">Settings Updated</string>
+    <string name="preferences_title_questions">Number of Questions</string>
+    <string name="preferences_summary_questions">Set the number of correct questions to win</string>
 </resources>

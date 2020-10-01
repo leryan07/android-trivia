@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="questions"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/preferences_summary_questions"
+        android:title="@string/preferences_title_questions" />
+</PreferenceScreen>

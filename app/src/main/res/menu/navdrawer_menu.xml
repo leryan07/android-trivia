@@ -25,7 +25,7 @@
         android:icon="@drawable/android"
         android:title="@string/about" />
     <item
-        android:id="@+id/triviaSettingsFragment"
+        android:id="@+id/triviaSettingsActivity"
         android:icon="@drawable/settings"
         android:title="@string/settings" />
 </menu>

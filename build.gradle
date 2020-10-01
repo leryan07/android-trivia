@@ -25,6 +25,7 @@ buildscript {
         version_navigation = "2.3.0"
         version_room = "2.0.0"
         version_coroutine = "1.1.0"
+        version_preferences = "1.1.0"
     }
     repositories {
         google()
