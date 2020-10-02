@@ -106,7 +106,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="settingsFragment">
+                  <entry key="settingsActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
