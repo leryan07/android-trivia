@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.example.android.navigation.R
 import com.example.android.navigation.databinding.FragmentGameBinding
 
@@ -69,6 +70,10 @@ class GameFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentGameBinding>(
                 inflater, R.layout.fragment_game, container, false)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.activity)
+
+        numQuestions = sharedPreferences.getString("numberOfQuestions", "3")?.toInt() ?: 3
 
         // Shuffles the questions and sets the question index to the first question.
         randomizeQuestions()
