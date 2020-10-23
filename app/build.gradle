@@ -54,6 +54,9 @@ dependencies {
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
+    // Coordinator Layout
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$version_coordinator_layout"
+
     // Core
     implementation "androidx.core:core:$version_core"
 
