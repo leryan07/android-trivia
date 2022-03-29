@@ -21,11 +21,11 @@
     app:startDestination="@+id/titleFragment">
     <activity
         android:id="@+id/settingsActivity"
-        android:name="com.example.android.navigation.SettingsActivity"
+        android:name="com.example.android.navigation.settings.SettingsActivity"
         android:label="@string/settings" />
     <fragment
         android:id="@+id/gameOverFragment"
-        android:name="com.example.android.navigation.GameOverFragment"
+        android:name="com.example.android.navigation.game.GameOverFragment"
         android:label="@string/android_trivia"
         tools:layout="@layout/fragment_game_over">
         <action
@@ -42,12 +42,12 @@
     </fragment>
     <fragment
         android:id="@+id/rulesFragment"
-        android:name="com.example.android.navigation.RulesFragment"
+        android:name="com.example.android.navigation.settings.RulesFragment"
         android:label="@string/title_trivia_rules"
         tools:layout="@layout/fragment_rules" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.android.navigation.AboutFragment"
+        android:name="com.example.android.navigation.settings.AboutFragment"
         android:label="@string/title_about_trivia"
         tools:layout="@layout/fragment_about" />
     <fragment

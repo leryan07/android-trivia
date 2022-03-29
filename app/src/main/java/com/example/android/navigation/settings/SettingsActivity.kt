@@ -1,10 +1,11 @@
-package com.example.android.navigation
+package com.example.android.navigation.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import com.example.android.navigation.R
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             if (key == "numberOfQuestions") {
-                val numQuestions = sharedPreferences.getString("numberOfQuestions", "3");
+                val numQuestions = sharedPreferences.getString("numberOfQuestions", "3")
 
                 Toast.makeText(this.context,
                         "Number of questions was updated to: $numQuestions", Toast.LENGTH_SHORT)
