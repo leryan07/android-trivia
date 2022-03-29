@@ -5,6 +5,6 @@ This is a toy app that was used for [Android App Development in Kotlin course on
 The original repo can be found here (https://github.com/udacity/andfun-kotlin-android-trivia).
 ## Added Functionality
 ### Settings
-* Created a new settings activity so that user can change the number of questions to answer correctly to win the game (3, 5, 10)
+* Created a new settings activity so that the user can change the number of correct questions answered to win the game (3, 5, 10)
 * The game settings are saved using the Room library
 * After the user wins the game, a snackbar is shown so that the user can jump to the settings activity
