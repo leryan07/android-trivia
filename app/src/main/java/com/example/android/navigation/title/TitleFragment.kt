@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigation
+package com.example.android.navigation.title
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,9 +25,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.android.navigation.R
+import com.example.android.navigation.database.TriviaSettingsDatabase
 import com.example.android.navigation.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
@@ -35,9 +39,28 @@ class TitleFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentTitleBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_title, container, false)
-        binding.playButton.setOnClickListener { v: View ->
-            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
-        }
+
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = TriviaSettingsDatabase.getInstance(application).triviaSettingsDatabaseDao
+
+        val viewModelFactory = TitleViewModelFactory(dataSource, application)
+
+        val titleViewModel = ViewModelProvider(this, viewModelFactory)
+                .get(TitleViewModel::class.java)
+
+        titleViewModel.navigateToGameFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                this.findNavController()
+                        .navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+
+                titleViewModel.doneNavigating()
+            }
+        })
+
+        binding.titleViewModel = titleViewModel
+        binding.lifecycleOwner = this
+
         setHasOptionsMenu(true)
         return binding.root
     }

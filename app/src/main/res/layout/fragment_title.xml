@@ -19,7 +19,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.navigation.TitleFragment">
+    tools:context="com.example.android.navigation.title.TitleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
@@ -30,10 +30,11 @@
             android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
-            android:paddingStart="@dimen/button_padding"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:onClick="@{() -> titleViewModel.onPlayButtonClicked()}"
             android:paddingEnd="@dimen/button_padding"
+            android:paddingStart="@dimen/button_padding"
             android:text="Play"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/button_text_size"
@@ -47,8 +48,8 @@
             android:id="@+id/titleImage"
             android:layout_width="0dp"
             android:layout_height="@dimen/image_header_height"
-            android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
+            android:layout_marginStart="@dimen/horizontal_margin"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/playButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,4 +59,11 @@
             app:srcCompat="@drawable/android_trivia" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="titleViewModel"
+            type="com.example.android.navigation.title.TitleViewModel" />
+    </data>
 </layout>

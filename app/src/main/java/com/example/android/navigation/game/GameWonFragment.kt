@@ -16,41 +16,41 @@
 
 package com.example.android.navigation
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.*
 import androidx.core.app.ShareCompat
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameWonBinding
-import android.content.pm.ResolveInfo
-import android.content.pm.PackageManager
-
+import com.google.android.material.snackbar.Snackbar
 
 
 class GameWonFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         val binding: FragmentGameWonBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_won, container, false)
+
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(
                     GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
         }
+
+        val snackbar = Snackbar.make(binding.gameWonCoordinatorLayout,
+                "Good job! Try increasing the number of questions", Snackbar.LENGTH_LONG)
+
+        snackbar.setAction(R.string.settings, SettingsListener())
+        snackbar.show()
+
         setHasOptionsMenu(true)
         return binding.root
     }
 
-    private fun getShareIntent() : Intent {
+    private fun getShareIntent(): Intent {
         val args = GameWonFragmentArgs.fromBundle(requireArguments())
         return ShareCompat.IntentBuilder.from(activity!!)
                 .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
@@ -77,5 +77,11 @@ class GameWonFragment : Fragment() {
             R.id.share -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
+    }
+}
+
+class SettingsListener : View.OnClickListener {
+    override fun onClick(v: View?) {
+        v?.findNavController()?.navigate(R.id.settingsActivity)
     }
 }

@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:defaultValue="3"
+        android:entries="@array/string_array_number_of_questions"
+        android:entryValues="@array/string_array_number_of_questions"
+        android:key="numberOfQuestions"
+        android:summary="@string/preferences_summary_questions"
+        android:title="@string/preferences_title_questions"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +19,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_root"
     app:startDestination="@+id/titleFragment">
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.example.android.navigation.settings.SettingsActivity"
+        android:label="@string/settings" />
+    <fragment
+        android:id="@+id/gameOverFragment"
+        android:name="com.example.android.navigation.game.GameOverFragment"
+        android:label="@string/android_trivia"
+        tools:layout="@layout/fragment_game_over">
+        <action
+            android:id="@+id/action_gameOverFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/titleFragment" />
+        <argument
+            android:name="numQuestions"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.android.navigation.settings.RulesFragment"
+        android:label="@string/title_trivia_rules"
+        tools:layout="@layout/fragment_rules" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.android.navigation.settings.AboutFragment"
+        android:label="@string/title_about_trivia"
+        tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.android.navigation.TitleFragment"
+        android:name="com.example.android.navigation.title.TitleFragment"
         android:label="@string/android_trivia"
         tools:layout="@layout/fragment_title">
         <action
@@ -35,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.android.navigation.GameFragment"
+        android:name="com.example.android.navigation.game.GameFragment"
         android:label="@string/android_trivia"
         tools:layout="@layout/fragment_game">
         <action
@@ -47,7 +77,6 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/gameFragment"
             app:popUpToInclusive="true" />
-        />
         <action
             android:id="@+id/action_gameFragment_to_gameWonFragment"
             app:destination="@id/gameWonFragment"
@@ -63,12 +92,6 @@
         android:name="com.example.android.navigation.GameWonFragment"
         android:label="@string/android_trivia"
         tools:layout="@layout/fragment_game_won">
-        <argument
-            android:name="numQuestions"
-            app:argType="integer" />
-        <argument
-            android:name="numCorrect"
-            app:argType="integer" />
         <action
             android:id="@+id/action_gameWonFragment_to_gameFragment"
             app:destination="@id/gameFragment"
@@ -76,30 +99,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/titleFragment"/>
-    </fragment>
-    <fragment
-        android:id="@+id/gameOverFragment"
-        android:name="com.example.android.navigation.GameOverFragment"
-        android:label="@string/android_trivia"
-        tools:layout="@layout/fragment_game_over">
-        <action
-            android:id="@+id/action_gameOverFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/titleFragment" />
+        <argument
+            android:name="numCorrect"
+            app:argType="integer" />
+        <argument
+            android:name="numQuestions"
+            app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/rulesFragment"
-        android:name="com.example.android.navigation.RulesFragment"
-        android:label="@string/title_trivia_rules"
-        tools:layout="@layout/fragment_rules" />
-    <fragment
-        android:id="@+id/aboutFragment"
-        android:name="com.example.android.navigation.AboutFragment"
-        android:label="@string/title_about_trivia"
-        tools:layout="@layout/fragment_about" />
 </navigation>
